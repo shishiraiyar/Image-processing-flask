@@ -2,14 +2,17 @@ from PIL import Image
 import numpy as np
 from math import sqrt
 
-kernel_gauss = [[1 / 16, 1 / 8, 1 / 16], [1 / 8, 1 / 4, 1 / 8], [1 / 16, 1 / 8, 1 / 16]]
-kernel_mean = [[1/9, 1/9, 1/9], [1/9, 1/9, 1/9], [1/9, 1/9, 1/9]]
-
-im1 = Image.open("rose_half.jpg")
-image = np.asarray(im1)
+dkjfslfkldjkernel =  [[0, -1, 0], 
+               [-1, 5, -1], 
+               [0, -1, 0]]
 
 
-def greyscale(img):
+
+
+
+def greyscale(path):
+    im1 = Image.open(path)
+    img = np.asarray(im1)
     img2 = np.copy(img)
     for row in range(len(img)):
         for column in range(len(img[row])):
@@ -21,6 +24,7 @@ def greyscale(img):
             img2[row][column][1] = grey
             img2[row][column][2] = grey
         print(f"Processing row : {row}")
+    Image.fromarray(img2).save(path)
     return img2
 
 
@@ -44,8 +48,6 @@ def convolution(img, kernel):
             img2[row][column][0] = red_new
             img2[row][column][1] = green_new
             img2[row][column][2] = blue_new
-        # print(f"Processing row : {row}")
-    Image.fromarray(image).save("lol.png")
     return img2
 
 def checkIntensity(intensity):
@@ -55,7 +57,41 @@ def checkIntensity(intensity):
         return 0
     return intensity
 
-def sobel(img):
+def mean_blur(path):
+    im1 = Image.open(path)
+    img = np.asarray(im1)
+    kernel = [[1/9, 1/9, 1/9], 
+              [1/9, 1/9, 1/9], 
+              [1/9, 1/9, 1/9]]
+    img2 = convolution(img, kernel)
+    Image.fromarray(img2).save(path)
+
+def gaussian_blur(path):
+    im1 = Image.open(path)
+    img = np.asarray(im1)
+    kernel =  [[1 / 16, 1 / 8, 1 / 16], 
+               [1 / 8, 1 / 4, 1 / 8], 
+               [1 / 16, 1 / 8, 1 / 16]]
+
+    img2 = convolution(img, kernel)
+    Image.fromarray(img2).save(path)
+
+def sharpen(path):
+    im1 = Image.open(path)
+    img = np.asarray(im1)
+    kernel =  [[0, -1 , 0], 
+               [-1, 5, -1], 
+               [0, -1, 0]]
+
+    img2 = convolution(img, kernel)
+    Image.fromarray(img2).save(path)
+
+
+
+def sobel(path):
+    greyscale(path)
+    im1 = Image.open(path)
+    img = np.asarray(im1)
     kernel_edge_ver = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
     kernel_edge_hor = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
     img2 = np.copy(img)
@@ -76,7 +112,7 @@ def sobel(img):
             img2[row][column][0] = new_val
             img2[row][column][1] = new_val
             img2[row][column][2] = new_val
-        print(f"Processing row : {row}")
+    Image.fromarray(img2).save(path)
     return img2
 
 # sfkdsklf = convolution(image, kernel_mean)
