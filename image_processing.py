@@ -2,14 +2,6 @@ from PIL import Image
 import numpy as np
 from math import sqrt
 
-dkjfslfkldjkernel =  [[0, -1, 0], 
-               [-1, 5, -1], 
-               [0, -1, 0]]
-
-
-
-
-
 def greyscale(path):
     im1 = Image.open(path)
     img = np.asarray(im1)
