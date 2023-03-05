@@ -4,7 +4,8 @@ const id = String(url.searchParams.get("id"))
 console.log(id)
 
 
-document.getElementById("image").src = "static/images/" + id + ".png"
+function onpageLoad(){
+    document.getElementById("image").src = "static/images/" + id + ".png"
 
 document.getElementById("grayscaleButton").addEventListener("click", async function(){
     let data = {"id":id,"process":"grayscale"}
@@ -32,6 +33,12 @@ document.getElementById("sharpenButton").addEventListener("click", async functio
     imageProcessing(data)
 })
 
+document.getElementById("homeButton").addEventListener("click", function(){
+    window.location.replace("/")
+})
+
+
+}
 
 
 async function imageProcessing(data){//send appropriate data to get the server to do whatever you want
@@ -47,3 +54,7 @@ async function imageProcessing(data){//send appropriate data to get the server t
     window.location.reload()
     return response
 }
+
+window.onload = (event) => {
+    onpageLoad()
+  };

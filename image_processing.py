@@ -15,7 +15,7 @@ def greyscale(path):
             img2[row][column][0] = grey
             img2[row][column][1] = grey
             img2[row][column][2] = grey
-        print(f"Processing row : {row}")
+        # print(f"Processing row : {row}")
     Image.fromarray(img2).save(path)
     return img2
 
@@ -84,8 +84,12 @@ def sobel(path):
     greyscale(path)
     im1 = Image.open(path)
     img = np.asarray(im1)
-    kernel_edge_ver = [[-1, -2, -1], [0, 0, 0], [1, 2, 1]]
-    kernel_edge_hor = [[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]]
+    kernel_edge_ver = [[-1, -2, -1], 
+                       [0, 0, 0], 
+                       [1, 2, 1]]
+    kernel_edge_hor = [[-1, 0, 1], 
+                       [-2, 0, 2], 
+                       [-1, 0, 1]]
     img2 = np.copy(img)
     for row in range(1, len(img) - 1):
         for column in range(1, len(img[row]) - 1):
