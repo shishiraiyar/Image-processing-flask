@@ -1,5 +1,23 @@
-id = 0;
-document.getElementById("submitImg").addEventListener("click",async function(){
+document.getElementById("imageProcessing").addEventListener("click",async function(){
+    
+    id = await uploadImage()
+    window.location.replace("/imageProcessing?id=" + id)
+})
+
+document.getElementById("stegEncode").addEventListener("click",async function(){
+    
+    id = await uploadImage()
+    window.location.replace("/Encode?id=" + id)
+})
+
+document.getElementById("stegDecode").addEventListener("click",async function(){
+    
+    id = await uploadImage()
+    window.location.replace("/Decode?id=" + id)
+})
+
+
+async function uploadImage(){
     const formData = new FormData()
     console.log(document.getElementById("inputImg").files[0])
     let img = document.getElementById("inputImg").files[0]
@@ -17,8 +35,6 @@ document.getElementById("submitImg").addEventListener("click",async function(){
     let response = await fetch("/uploadImage", requestOptions).then(response=>response.json())
     console.log(response)
     id = response["id"]
-    window.location.replace("/imageProcessing?id=" + id)
-})
+    return id
 
-
- 
+}

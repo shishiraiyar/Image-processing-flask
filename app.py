@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from os import path
 from time import time
 from image_processing import *
+from steganography import *
 
 app = Flask(__name__)
 
@@ -38,6 +39,32 @@ def imageProcessing():
         sharpen(path)
         
     return {"success":0}
+
+@app.route("/Encode")
+def encodePage():
+    return render_template("stegEncode.html")
+
+@app.route("/Encode", methods=["POST"])
+def stegEncodePost():
+    id = request.json["id"]
+    message = request.json["message"]
+    path = "static/images/" + str(id) + ".png"
+    stegEncode(path, message)
+        
+    return {"success":message}
+
+@app.route("/Decode")
+def decodePage():
+    return render_template("stegDecode.html")
+
+@app.route("/Decode", methods=["POST"])
+def stegDecodePost():
+    id = request.json["id"]
+    path = "static/images/" + str(id) + ".png"
+    message = stegDecode(path)
+        
+    return {"message":message}
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
