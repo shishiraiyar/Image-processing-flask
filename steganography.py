@@ -11,8 +11,6 @@ def msgconv(msg):
         pairs += [s[j:j+2] for j in range(0,8,2)]
     return pairs
 
-#DIVIDE BY 4(floor). Multiply by 4. Add msgbit0 + 2*msgbit1
-#numbers instead of strings. should be much faster
 
 def stegEncode(path, message):
     pairs = msgconv(message)
@@ -62,7 +60,7 @@ def stegDecode(path):
             pixelCount +=1
             
             if len(temp) == 8:
-                message += chr(int(temp, 2))
+                message += chr(int(temp, 2))  #concatenate
                 temp = ""
 
             if pixelCount == msgLength*4:
@@ -74,8 +72,11 @@ def stegDecode(path):
 
 
 
-#make it multichannel ig
-
 if __name__ == "__main__":
     msg = stegDecode("static/images/1678620686.png")
     print(msg)
+
+
+#DIVIDE BY 4(floor). Multiply by 4. Add msgbit0 + 2*msgbit1
+#numbers instead of strings. should be much faster
+#make it multichannel ig

@@ -1,8 +1,8 @@
-document.getElementById("imageProcessing").addEventListener("click",async function(){
+// document.getElementById("imageProcessing").addEventListener("click",async function(){
     
-    id = await uploadImage()
-    window.location.replace("/imageProcessing?id=" + id)
-})
+//     id = await uploadImage()
+//     window.location.replace("/imageProcessing?id=" + id)
+// })
 
 document.getElementById("stegEncode").addEventListener("click",async function(){
     
