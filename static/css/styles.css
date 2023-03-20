@@ -6,3 +6,22 @@ body{
     margin-bottom: 10px;
 }
 
+.abc{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btn{
+    background-color:#d27685;
+    border-color: #d27685;
+    
+}
+
+.btn:hover{
+    background-color: #d27685;
+}
+
+.btn:active{
+    background-color: #d27685;
+
+}
