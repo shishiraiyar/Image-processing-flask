@@ -14,7 +14,7 @@ body{
 .btn{
     background-color:#d27685;
     border-color: #d27685;
-    
+    margin-bottom: 2px;
 }
 
 .btn:hover{
@@ -24,4 +24,8 @@ body{
 .btn:active{
     background-color: #d27685;
 
+}
+
+#inputText{
+    margin-bottom: 20px;
 }
